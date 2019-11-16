@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+
+  <ListView
+      android:id="@+id/lista"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintWidth_default="percent"
+      app:layout_constraintWidth_percent="0.99"
+      app:layout_constraintHeight_default="percent"
+      app:layout_constraintHeight_percent="0.64"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnQuarta"
+      app:layout_constraintVertical_bias="0.124" />
+
+  <Button
+      android:id="@+id/btnSegunda"
+      android:layout_width="58dp"
+      android:layout_height="55dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="64dp"
+      android:layout_marginEnd="16dp"
+      android:background="#55a57d"
+      android:text="S"
+      android:textColor="#f7f8fb"
+      android:textSize="24sp"
+      app:layout_constraintEnd_toStartOf="@+id/btnTerca"
+      app:layout_constraintHorizontal_bias="0.307"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+      android:id="@+id/btnTerca"
+      android:layout_width="58dp"
+      android:layout_height="55dp"
+      android:layout_marginTop="64dp"
+      android:layout_marginEnd="16dp"
+      android:background="#55a57d"
+      android:text="T"
+      android:textColor="#f7f8fb"
+      android:textSize="24sp"
+      app:layout_constraintEnd_toStartOf="@+id/btnQuarta"
+      app:layout_constraintStart_toEndOf="@+id/btnSegunda"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+      android:id="@+id/btnQuarta"
+      android:layout_width="58dp"
+      android:layout_height="55dp"
+      android:layout_marginTop="64dp"
+      android:layout_marginEnd="16dp"
+      android:background="#55a57d"
+      android:text="Q"
+      android:textColor="#f7f8fb"
+      android:textSize="24sp"
+      app:layout_constraintEnd_toStartOf="@+id/btnQuinta"
+      app:layout_constraintStart_toEndOf="@+id/btnTerca"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+      android:id="@+id/btnQuinta"
+      android:layout_width="58dp"
+      android:layout_height="55dp"
+      android:layout_marginTop="64dp"
+      android:layout_marginEnd="16dp"
+      android:background="#55a57d"
+      android:text="Q"
+      android:textColor="#f7f8fb"
+      android:textSize="24sp"
+      app:layout_constraintEnd_toStartOf="@+id/btnSexta"
+      app:layout_constraintStart_toEndOf="@+id/btnQuarta"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+      android:id="@+id/btnSexta"
+      android:layout_width="58dp"
+      android:layout_height="55dp"
+      android:layout_marginTop="64dp"
+      android:layout_marginEnd="16dp"
+      android:background="#55a57d"
+      android:text="S"
+      android:textColor="#f7f8fb"
+      android:textSize="24sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/btnQuinta"
+      app:layout_constraintTop_toTopOf="parent" />
+
+
+  <android.support.v7.widget.CardView
+      android:id="@+id/cardView"
+      android:layout_width="match_parent"
+      android:layout_height="70dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#22314c"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="8dp">
+
+      <ImageView
+          android:id="@+id/imgHome"
+          android:layout_width="165dp"
+          android:layout_height="95dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
+          android:layout_marginEnd="8dp"
+          android:layout_marginBottom="1dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="0.588"
+          android:src="@mipmap/ic_home" />
+
+      <ImageView
+          android:id="@+id/imgSair"
+          android:layout_width="105dp"
+          android:layout_height="78dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginEnd="8dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@+id/imgHome"
+          app:layout_constraintTop_toTopOf="parent"
+          android:src="@mipmap/ic_shut" />
+
+      <ImageView
+          android:id="@+id/imgProfile"
+          android:layout_width="120dp"
+          android:layout_height="75dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginEnd="8dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toStartOf="@+id/imgHome"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          android:src="@mipmap/ic_prof" />
+    </android.support.constraint.ConstraintLayout>
+
+  </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>
