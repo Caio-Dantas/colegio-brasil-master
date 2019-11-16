@@ -1,14 +1,13 @@
 package t.br.tcc;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,39 +15,57 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.content.Context;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.View.OnTouchListener;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 
-public class Activity_Horario extends Activity implements View.OnClickListener, OnTouchListener  {
+public class Activity_Horario extends Activity implements View.OnClickListener  {
     String dia ="Segunda";
     String[] list = {"Segunda", "Terça","Quarta","Quinta","Sexta"};
     int ind;
     ViewDialog viewDialog;
+    View view;
     setget sg = new setget();
     Button btnSg,btnT, btnQa, btnQi, btnSx;
-    private final GestureDetector gestureDetector;
-    public Activity_Horario(Context ctx){
-        gestureDetector = new GestureDetector(ctx, new GestureListener());
-    }
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        return gestureDetector.onTouchEvent(event);
-    }
+
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horario);
+        view = findViewById(R.id.activity_horario);
+        view.setOnTouchListener(new OnSwipeTouchListener(Activity_Horario.this) {
+            public void onSwipeTop() {
+            }
+            public void onSwipeRight() {
+                swipR();
+            }
+            public void onSwipeLeft() {
+                swipL();
+            }
+            public void onSwipeBottom() {
+            }
 
+        });
+
+        ListView lista = findViewById(R.id.lista);
+        lista.setOnTouchListener(new OnSwipeTouchListener(Activity_Horario.this) {
+            public void onSwipeTop() {
+            }
+            public void onSwipeRight() {
+                swipR();
+            }
+            public void onSwipeLeft() {
+                swipL();
+            }
+            public void onSwipeBottom() {
+            }
+
+        });
 
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
@@ -115,6 +132,8 @@ public class Activity_Horario extends Activity implements View.OnClickListener, 
 
 
 
+
+
     //todos os onclicks
     @Override
     public void onClick(View v) {
@@ -160,6 +179,7 @@ public class Activity_Horario extends Activity implements View.OnClickListener, 
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     class Load extends AsyncTask<String,String,String>
     {
         @Override
@@ -171,7 +191,7 @@ public class Activity_Horario extends Activity implements View.OnClickListener, 
         @Override
         protected String doInBackground(String... strings) {
             HttpHandler sh = new HttpHandler();
-            String json = sh.makeServiceCall("http://"+sh.ip+":81/horario.php?dia="+dia+"&id="+sg.getId()+"");
+            String json = sh.makeServiceCall("http://"+ HttpHandler.ip +":81/horario.php?dia="+dia+"&id="+sg.getId()+"");
             try {
                 JSONObject jsonn = new JSONObject(json);
                 JSONArray a = jsonn.getJSONArray("data");
@@ -251,70 +271,38 @@ public class Activity_Horario extends Activity implements View.OnClickListener, 
         btn.setBackgroundColor(Color.parseColor("#3d7358"));
     }
 
-
-    private final class GestureListener extends SimpleOnGestureListener {
-
-
-        private static final int SWIPE_THRESHOLD = 100;
-        private static final int SWIPE_VELOCITY_THRESHOLD = 100;
-
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return true;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            boolean result = false;
-            ind = Arrays.asList(list).indexOf(dia);
-            try {
-                float diffY = e2.getY() - e1.getY();
-                float diffX = e2.getX() - e1.getX();
-                if (Math.abs(diffX) > Math.abs(diffY)) {
-                    if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                        if (diffX > 0) {
-                            onSwipeRight();
-                        } else {
-                            onSwipeLeft();
-                        }
-                        result = true;
-                    }
-                }
-                else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                    if (diffY > 0) {
-                        onSwipeBottom();
-                    } else {
-                        onSwipeTop();
-                    }
-                    result = true;
-                }
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-            return result;
-        }
-    }
-
-    public void onSwipeRight() {
+    public void swipL(){
         if(ind!=list.length-1) {
             ind = ind + 1;
             dia = list[ind];
+            changeColor(pegaBtn(dia));
             new Load().execute();
         }
     }
 
-    public void onSwipeLeft() {
+    public void swipR(){
         if(ind!=0) {
             ind = ind - 1;
             dia = list[ind];
+            changeColor(pegaBtn(dia));
             new Load().execute();
         }
     }
 
-    public void onSwipeTop() {
-    }
-
-    public void onSwipeBottom() {
+    public Button pegaBtn(String day){
+        switch(day){
+            case "Segunda":
+                return btnSg;
+            case "Terça":
+                return btnT;
+            case "Quarta":
+                return btnQa;
+            case "Quinta":
+                return btnQi;
+            case "Sexta":
+                return btnSx;
+        }
+        return btnSg;
     }
 
     ArrayList<String> Anome = new ArrayList<>(), Atipo = new ArrayList<>();
