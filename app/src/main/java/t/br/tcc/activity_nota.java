@@ -2,6 +2,8 @@ package t.br.tcc;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -59,7 +61,7 @@ public class activity_nota extends Activity implements View.OnClickListener {
         protected String doInBackground(String... strings) {
             preencheArray();
             HttpHandler sh = new HttpHandler();
-            String json = sh.makeServiceCall("http://"+sh.ip+":81/pegaNota.php?id="+sg.getId()+"");
+            String json = sh.makeServiceCall("http://"+ HttpHandler.ip +":81/pegaNota.php?id="+sg.getId()+"");
             try {
                 JSONObject jsonn = new JSONObject(json);
                 JSONArray a = jsonn.getJSONArray("data");
@@ -157,11 +159,22 @@ public class activity_nota extends Activity implements View.OnClickListener {
                 ProgressBar pb4 = convertView.findViewById(R.id.p4);
                 //n.setText(Anome.get(position));
                 //t.setText(Atipo.get(position));
-                m.setText(Amat.get(position));
+                m.setText(Amat.get(position));if(Float.parseFloat(An1.get(position))<6){
+                    pb1.setProgressTintList(ColorStateList.valueOf(Color.RED));
+                }
                 pb1.setProgress(Math.round(Float.parseFloat(An1.get(position))*10));
                 //pb1.setProgress(89);
+                if(Float.parseFloat(An2.get(position))<6){
+                    pb2.setProgressTintList(ColorStateList.valueOf(Color.RED));
+                }
                 pb2.setProgress((Math.round(Float.parseFloat(An2.get(position))))*10);
+                if(Float.parseFloat(An3.get(position))<6){
+                    pb3.setProgressTintList(ColorStateList.valueOf(Color.RED));
+                }
                 pb3.setProgress((Math.round(Float.parseFloat(An3.get(position))*10)));
+                if(Float.parseFloat(An4.get(position))<6){
+                    pb4.setProgressTintList(ColorStateList.valueOf(Color.RED));
+                }
                 pb4.setProgress((Math.round(Float.parseFloat(An4.get(position))*10)));
 
 
@@ -197,7 +210,7 @@ public class activity_nota extends Activity implements View.OnClickListener {
         @Override
         protected String doInBackground(String... strings) {
             HttpHandler sh = new HttpHandler();
-            String json = sh.makeServiceCall("http://"+sh.ip+":81/pegaDisc.php?id="+sg.getId()+"");
+            String json = sh.makeServiceCall("http://"+ HttpHandler.ip +":81/pegaDisc.php?id="+sg.getId()+"");
             try {
                 JSONObject jsonn = new JSONObject(json);
                 JSONArray a = jsonn.getJSONArray("data");

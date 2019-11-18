@@ -103,13 +103,15 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
-          android:layout_marginTop="8dp"
+          android:layout_marginTop="4dp"
           android:layout_marginBottom="8dp"
           android:textColor="#000000"
+          android:textSize="18sp"
+          android:textStyle="bold"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          app:layout_constraintVertical_bias="0.059" />
+          app:layout_constraintVertical_bias="0.064" />
 
       <TextView
           android:id="@+id/txtb1"
