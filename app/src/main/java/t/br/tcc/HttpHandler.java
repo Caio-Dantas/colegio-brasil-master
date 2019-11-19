@@ -13,7 +13,7 @@ import java.net.URL;
 public class HttpHandler {
 
     private static final String TAG = HttpHandler.class.getSimpleName();
-    public static final String ip="192.168.15.25";
+    public static final String ip="192.168.137.1";
 
     public HttpHandler() {
     }

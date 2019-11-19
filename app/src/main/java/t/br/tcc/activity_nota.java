@@ -59,7 +59,7 @@ public class activity_nota extends Activity implements View.OnClickListener {
 
         @Override
         protected String doInBackground(String... strings) {
-            preencheArray();
+            //preencheArray();
             HttpHandler sh = new HttpHandler();
             String json = sh.makeServiceCall("http://"+ HttpHandler.ip +":81/pegaNota.php?id="+sg.getId()+"");
             try {
@@ -74,7 +74,10 @@ public class activity_nota extends Activity implements View.OnClickListener {
                     JSONObject n = a.getJSONObject(i);
                     //Log.i("teste", n.getString("id"));
                     //txtSen.setText(n.getString("id"));
-                    Amat.add(n.getString("mat"));
+                    if(Amat.indexOf(n.getString("mat"))>-1){
+                    }else{
+                        Amat.add(n.getString("mat"));
+                    }
                     String bim = n.getString("bim");
                     if(bim.equals("1")){
                         An1.add(n.getString("nota"));
@@ -90,21 +93,20 @@ public class activity_nota extends Activity implements View.OnClickListener {
                         An4.add(n.getString("nota"));
                         cb4=true;
                     }
-                    if(!cb1)
+                    /*if(!cb1)
                         An1.add("0");
                     if(!cb2)
                         An2.add("0");
                     if(!cb3)
                         An3.add("0");
                     if(!cb4)
-                        An4.add("0");
+                        An4.add("0");*/
 
                     //An2.add("0");
                     //An3.add("0");
                     //An4.add("0");
 
                 }
-                new LoadDefault().execute();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -116,12 +118,15 @@ public class activity_nota extends Activity implements View.OnClickListener {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try{
+                //preencheArray();
                 //((ListView)findViewById(R.id.listaN)).setAdapter(new Lista());
+                new LoadDefault().execute();
+
             }
             catch(Exception e){
                 e.printStackTrace();
             }
-            //vd.hideDialog();
+            vd.hideDialog();
         }
     }
 
@@ -159,7 +164,8 @@ public class activity_nota extends Activity implements View.OnClickListener {
                 ProgressBar pb4 = convertView.findViewById(R.id.p4);
                 //n.setText(Anome.get(position));
                 //t.setText(Atipo.get(position));
-                m.setText(Amat.get(position));if(Float.parseFloat(An1.get(position))<6){
+                m.setText(Amat.get(position));
+                if(Float.parseFloat(An1.get(position))<6){
                     pb1.setProgressTintList(ColorStateList.valueOf(Color.RED));
                 }
                 pb1.setProgress(Math.round(Float.parseFloat(An1.get(position))*10));
@@ -197,11 +203,11 @@ public class activity_nota extends Activity implements View.OnClickListener {
     }
 
     public void preencheArray(){
-        for(int i = 0; i<3;i++){
-            An1.add(i, "0");
-            An2.add(i, "0");
-            An3.add(i, "0");
-            An4.add(i, "0");
+        for(int i = 0; i<Amat.size();i++){
+            An1.add("0");
+            An2.add("0");
+            An3.add("0");
+            An4.add("0");
         }
     }
 
@@ -229,13 +235,14 @@ public class activity_nota extends Activity implements View.OnClickListener {
                         else{
                             if(!All.get(i).equals(Amat.get(Amat.size()-1))) {
                                 ToAdd.add(All.get(i));
-                                Amat.add(All.get(i));
+                                if(Amat.indexOf(All.get(i))>-1){
+                                }else{
+                                    Amat.add(All.get(i));
+                                }
                                 An1.add("0");
                                 An2.add("0");
                                 An3.add("0");
                                 An4.add("0");
-                            }else{
-                                //i++;
                             }
                         }
                     }
@@ -253,6 +260,7 @@ public class activity_nota extends Activity implements View.OnClickListener {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try{
+                preencheArray();
                 ((ListView)findViewById(R.id.listaN)).setAdapter(new Lista());
             }catch (Exception e){
                 e.printStackTrace();
