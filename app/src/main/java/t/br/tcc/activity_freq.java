@@ -63,7 +63,7 @@ public class activity_freq extends Activity implements View.OnClickListener {
         @Override
         protected String doInBackground(String... strings) {
             HttpHandler sh = new HttpHandler();
-            String json = sh.makeServiceCall("http://"+sh.ip+":81/pegaFreq.php?id="+sg.getId()+"");
+            String json = sh.makeServiceCall("http://"+ HttpHandler.ip +":81/pegaFreq.php?id="+sg.getId()+"");
             try {
                 JSONObject jsonn = new JSONObject(json);
                 JSONArray a = jsonn.getJSONArray("data");
@@ -180,7 +180,7 @@ public class activity_freq extends Activity implements View.OnClickListener {
         @Override
         protected String doInBackground(String... strings) {
             HttpHandler sh = new HttpHandler();
-            String json = sh.makeServiceCall("http://"+sh.ip+":81/pegaDisc.php?id="+sg.getId()+"");
+            String json = sh.makeServiceCall("http://"+ HttpHandler.ip +":81/pegaDisc.php?id="+sg.getId()+"");
             try {
                 JSONObject jsonn = new JSONObject(json);
                 JSONArray a = jsonn.getJSONArray("data");
@@ -189,27 +189,18 @@ public class activity_freq extends Activity implements View.OnClickListener {
                     All.add(n.getString("disc"));
                 }
 
-                int si = Adisc.size();
 
                 for (int i = 0; i < All.size(); i++) {
-                    for (int p = 0; p < si; p++) {
-                        if(All.get(i).equals(Adisc.get(p))){
+                    if(Adisc.indexOf(All.get(i))>-1){
                             break;
                         }
                         else{
-                            if(!All.get(i).equals(Adisc.get(Adisc.size()-1))) {
-                                //ToAdd.add(All.get(i));
                                 Adisc.add(All.get(i));
                                 Adad.add("0");
                                 Afalta.add("0");
                                 Atot.add("0");
-                            }else{
-                                //i++;
-                            }
                         }
-                    }
                 }
-                // Log.e("count", i+"");
 
 
             }catch (Exception e){

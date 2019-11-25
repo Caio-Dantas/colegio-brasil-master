@@ -17,8 +17,10 @@ public class Click extends AppCompatActivity {
                 a.startActivity(intent);
                 break;
             case R.id.imgSair:
-                SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
+                SharedPreferences pref;
+                SharedPreferences.Editor editor;
+                pref = a.getSharedPreferences("pref", MODE_PRIVATE);
+                editor = pref.edit();
                 editor.putString("id","off");
                 editor.commit();
                 Intent it = new Intent(a, activty_login.class);

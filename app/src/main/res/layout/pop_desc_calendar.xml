@@ -23,14 +23,14 @@
 
     <TextView
         android:id="@+id/txtDescript"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:text="TextView"
-        android:textAlignment="viewStart"
+        android:textAlignment="viewEnd"
         android:textColor="#D4E1EC"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnOk2"
