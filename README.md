@@ -1,5 +1,5 @@
 # Colégio Brasil
-Aplicativo para escola, exemplo usado Colégio Brasil.
+Aplicativo desenvolvido com base em um sistema escolar, projeto desenvolvido com base no Colégio Brasil.
 
 # Screenshots
 
